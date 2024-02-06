@@ -1,3 +1,5 @@
+import 'package:eslami/Home.dart';
+import 'package:eslami/Splash.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,6 +13,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      routes: {
+        Splash.routeName:(_)=>Splash(),
+        Home.routeName:(_)=>Home(), },
+      initialRoute:Splash.routeName ,
     );
   }
 }
