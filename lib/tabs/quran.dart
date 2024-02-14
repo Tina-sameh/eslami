@@ -1,6 +1,8 @@
 import 'package:eslami/Utils/app_assets.dart';
 import 'package:eslami/Utils/app_colors.dart';
 import 'package:eslami/Utils/constants.dart';
+import 'package:eslami/Utils/sura_details/sura_details.dart';
+import 'package:eslami/model/sura_details_arguments.dart';
 import 'package:flutter/material.dart';
 
 class QuranTab extends StatelessWidget {
@@ -60,13 +62,19 @@ class QuranTab extends StatelessWidget {
                     itemBuilder: (context,index){
                       return Padding(
                         padding: EdgeInsets.only(top:10),
-                        child: Row(
-                          children: [
-                            Expanded(child: Text("${Constants.versesNumber[index]}",
-                              style: TextStyle(fontSize: 30,fontWeight:FontWeight.normal),textAlign: TextAlign.center,)),
-                            Expanded(child: Text(Constants.suraNames[index],
-                              style: TextStyle(fontSize: 30,fontWeight: FontWeight.normal),textAlign: TextAlign.center,)),
-                          ],
+                        child: InkWell(
+                          onTap: (){
+                            Navigator.pushNamed(context, SuraDetails.routeName,
+                                arguments:SuraDetailsArg(fileName: "${index+1}.txt",suraName: Constants.suraNames[index]) );
+                          },
+                          child: Row(
+                            children: [
+                              Expanded(child: Text("${Constants.versesNumber[index]}",
+                                style: TextStyle(fontSize: 30,fontWeight:FontWeight.normal),textAlign: TextAlign.center,)),
+                              Expanded(child: Text(Constants.suraNames[index],
+                                style: TextStyle(fontSize: 30,fontWeight: FontWeight.normal),textAlign: TextAlign.center,)),
+                            ],
+                          ),
                         ),
                       );
                     }

@@ -1,5 +1,6 @@
 import 'package:eslami/Home.dart';
 import 'package:eslami/Splash.dart';
+import 'package:eslami/Utils/sura_details/sura_details.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,8 +16,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       routes: {
         Splash.routeName:(_)=>Splash(),
-        Home.routeName:(_)=>Home(), },
-      initialRoute:Splash.routeName ,
+        Home.routeName:(_)=>Home(),
+        SuraDetails.routeName:(_)=>SuraDetails(),
+      },
+      initialRoute:Home.routeName ,
     );
   }
 }
