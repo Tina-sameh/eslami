@@ -18,10 +18,13 @@ class QuranTab extends StatelessWidget {
          Expanded(
            flex: 7,
            child: Stack(
+             alignment: Alignment.center,
              children: [
                buildScreen(),
-               Center(
-                   child: VerticalDivider(thickness: 3,color: AppColors.brown,))
+               Container(
+                 width:3,
+                   height: double.infinity,
+                   color: AppColors.brown,)
              ],
            ),
          ),

@@ -52,7 +52,7 @@ class _SebhaTabState extends State<SebhaTab> {
              color:Color(0xffc8b496),
              borderRadius: BorderRadius.circular(20),
            ),
-            child: Center(child: Text("$count",style: TextStyle(fontSize:20),)),
+            child: Center(child: Text("$count",style: TextStyle(fontSize:20,fontWeight: FontWeight.w600),)),
                  ),
 
         Spacer(flex: 1,),

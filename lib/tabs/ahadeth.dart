@@ -1,6 +1,5 @@
 import 'package:eslami/Utils/app_assets.dart';
 import 'package:eslami/Utils/app_colors.dart';
-import 'package:eslami/tabs/ahadeth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
