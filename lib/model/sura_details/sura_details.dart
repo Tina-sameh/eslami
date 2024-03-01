@@ -1,7 +1,5 @@
 import 'package:eslami/Screen.dart';
-import 'package:eslami/Utils/app_assets.dart';
-import 'package:eslami/Utils/app_colors.dart';
-import 'package:eslami/model/sura_details_arguments.dart';
+import 'package:eslami/model/screen_details_arguments.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -18,10 +16,11 @@ class _SuraDetailsState extends State<SuraDetails> {
 
   @override
   Widget build(BuildContext context) {
-    SuraDetailsArg args = ModalRoute.of(context)!.settings.arguments as SuraDetailsArg;
+    ScreenDetailsArg args = ModalRoute.of(context)!.settings.arguments as ScreenDetailsArg;
     if(fileContent.isEmpty){
     read(args.fileName);}
     return BasicScreen(
+      title: args.Name,
       body: Container(
         decoration: BoxDecoration(
           color: Color(0xfff8f8f8),
@@ -44,12 +43,10 @@ class _SuraDetailsState extends State<SuraDetails> {
     Future<String> futureFileContent = rootBundle.loadString(
         "assets/files/quran/${fileName}");
      fileContent = await futureFileContent;
-    print("$fileContent");
 
     List<String> fileLines=fileContent.split("\n");
      for(int i=0;i<fileLines.length;i++){
        fileLines[i] += "{${i+1}}";
-       print("$i \n");
      }
      fileContent=fileLines.join(" ");
      setState(() {

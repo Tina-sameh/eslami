@@ -1,6 +1,7 @@
 import 'package:eslami/Utils/app_assets.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../Utils/App_Localization_Utils.dart';
 
 class SebhaTab extends StatefulWidget {
   const SebhaTab({super.key});
@@ -16,7 +17,7 @@ class _SebhaTabState extends State<SebhaTab> {
   List<String> tasbeh=["الحمدلله","سبحان الله","لا اله الا الله","الله اكبر"];
   void rotating(){
     setState(() {
-      rotate+=.5;
+      rotate+=.3;
     });
   }
   @override
@@ -42,7 +43,7 @@ class _SebhaTabState extends State<SebhaTab> {
                       )),
         Spacer(flex: 1,),
         Center(
-              child: Text('عدد التسبيحات',style: TextStyle(fontSize: 30),)),
+              child: Text(context.getLocal().count,style: TextStyle(fontSize: 30),)),
         Spacer(flex: 1,),
         Container(
            height: 75,

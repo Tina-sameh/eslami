@@ -1,7 +1,10 @@
 import 'package:eslami/Utils/app_assets.dart';
 import 'package:eslami/Utils/app_colors.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:eslami/model/screen_details_arguments.dart';
 import 'package:flutter/material.dart';
+
+import '../Utils/App_Localization_Utils.dart';
+import '../model/hadeth_details/ahadeth_details.dart';
 
 class AhadethTab extends StatelessWidget {
   const AhadethTab({super.key});
@@ -22,7 +25,7 @@ class AhadethTab extends StatelessWidget {
                 width: double.infinity,
                 color: AppColors.brown,
               ),
-          Text("الأحاديث",
+          Text(context.getLocal().ahadeth,
               style: TextStyle(fontWeight: FontWeight.w600,fontSize: 30,),textAlign: TextAlign.center),
               Container(
                 height: 3,
@@ -35,7 +38,11 @@ class AhadethTab extends StatelessWidget {
                 itemCount: 50,
                 itemBuilder: (context,index){
                   return InkWell(
-                    onTap: (){},
+                    onTap: (){
+Navigator.pushNamed(context, HadethDetails.routeName,
+arguments: ScreenDetailsArg(fileName:"h${index+1}.txt", Name:" الحديث رقم ${index+1} " )
+);
+                    },
                     child: Padding(
                       padding: EdgeInsets.only(top:10),
                       child: Row(

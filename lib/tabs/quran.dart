@@ -1,13 +1,21 @@
+
+import 'package:eslami/Utils/App_Localization_Utils.dart';
 import 'package:eslami/Utils/app_assets.dart';
 import 'package:eslami/Utils/app_colors.dart';
 import 'package:eslami/Utils/constants.dart';
-import 'package:eslami/Utils/sura_details/sura_details.dart';
-import 'package:eslami/model/sura_details_arguments.dart';
+import 'package:eslami/model/screen_details_arguments.dart';
 import 'package:flutter/material.dart';
 
-class QuranTab extends StatelessWidget {
+import '../model/sura_details/sura_details.dart';
+
+class QuranTab extends StatefulWidget {
   const QuranTab({super.key});
 
+  @override
+  State<QuranTab> createState() => _QuranTabState();
+}
+
+class _QuranTabState extends State<QuranTab> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -45,10 +53,11 @@ class QuranTab extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: Text("عدد الايات ",
-                      style: TextStyle(fontWeight: FontWeight.w600,fontSize: 30,),textAlign: TextAlign.center),),
+                  child: Text(context.getLocal().verse,
+                      style: TextStyle(fontWeight: FontWeight.w600,fontSize: 30,),
+                      textAlign: TextAlign.center),),
                 Expanded(
-                  child: Text("اسم السورة",
+                  child: Text(context.getLocal().suraName,
                       style: TextStyle(fontWeight: FontWeight.w600,fontSize: 30),textAlign: TextAlign.center),),
 
               ],
@@ -68,7 +77,7 @@ class QuranTab extends StatelessWidget {
                         child: InkWell(
                           onTap: (){
                             Navigator.pushNamed(context, SuraDetails.routeName,
-                                arguments:SuraDetailsArg(fileName: "${index+1}.txt",suraName: Constants.suraNames[index]) );
+                                arguments:ScreenDetailsArg(fileName: "${index+1}.txt",Name: Constants.suraNames[index]) );
                           },
                           child: Row(
                             children: [

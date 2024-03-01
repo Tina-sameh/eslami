@@ -1,10 +1,13 @@
+import 'package:eslami/Screen.dart';
+import 'package:eslami/Utils/App_Localization_Utils.dart';
 import 'package:eslami/Utils/app_assets.dart';
-import 'package:eslami/Utils/app_colors.dart';
 import 'package:eslami/tabs/ahadeth.dart';
 import 'package:eslami/tabs/quran.dart';
 import 'package:eslami/tabs/radio.dart';
 import 'package:eslami/tabs/sebha.dart';
+import 'package:eslami/tabs/settings_tab.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Home extends StatefulWidget {
   static String routeName = "home";
@@ -16,65 +19,57 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int current = 3;
+  int current = 0;
 
 Widget currentTab=QuranTab();
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-          image: DecorationImage(image: AssetImage(AppAssets.background))),
-      child: Scaffold(
-        backgroundColor: AppColors.transparent,
-        appBar: AppBar(
-          backgroundColor: AppColors.transparent,
-          elevation: 0,
-          title: Text("اسلامى",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 30,
-              )),
-          centerTitle: true,
-        ),
-        bottomNavigationBar:  buildBottomNavigationBar() ,
+    return BasicScreen(
+      title:context.getLocal().suraName,
+      bottomNavigation:  buildBottomNavigationBar ,
        body:currentTab ,
-      ),
     );
   }
 
-  Widget buildBottomNavigationBar() => Theme(
-        data: ThemeData(canvasColor: AppColors.brown),
+  Widget get buildBottomNavigationBar => Theme(
+        data: Theme.of(context).copyWith(canvasColor: Theme.of(context).primaryColor),
         child: BottomNavigationBar(
-            selectedItemColor: AppColors.black,
             currentIndex: current,
             onTap: (index) {
               current = index;
               if(current==0){
-                currentTab=RadioTab();
-              }else    if(current==1){
-                currentTab=SebhaTab();
-              }else    if(current==2){
-                currentTab=AhadethTab();
-              }else    if(current==3){
                 currentTab=QuranTab();
+              }else    if(current==1){
+                currentTab=AhadethTab();
+              }else    if(current==2){
+                currentTab=SebhaTab();
+              }else    if(current==3){
+                currentTab=RadioTab();
+              }else    if(current==4){
+                currentTab=Settings();
               }
               setState(() {});
             },
             items: [
-              buildBottomNavigationBarItem(AppAssets.icRadio, "راديو"),
-              buildBottomNavigationBarItem(AppAssets.icSeb7a, "التسبيح"),
-              buildBottomNavigationBarItem(AppAssets.icAhadeth, "احاديث"),
-              buildBottomNavigationBarItem(AppAssets.icQuran, "القرأن"),
+              buildBottomNavigationBarItem(imagePath:AppAssets.icQuran, AppLocalizations.of(context)!.quran),
+              buildBottomNavigationBarItem(imagePath:AppAssets.icAhadeth, AppLocalizations.of(context)!.ahadeth),
+              buildBottomNavigationBarItem(imagePath:AppAssets.icSeb7a, AppLocalizations.of(context)!.tasbeeh),
+              buildBottomNavigationBarItem(imagePath:AppAssets.icRadio, AppLocalizations.of(context)!.radio),
+              buildBottomNavigationBarItem( iconData: Icons.settings_rounded,AppLocalizations.of(context)!.settings),
             ]),
       );
 
   BottomNavigationBarItem buildBottomNavigationBarItem(
-    String ImagePath,
     String label,
+      {String? imagePath, IconData? iconData}
   ) =>
       BottomNavigationBarItem(
-        icon: ImageIcon(AssetImage(ImagePath), size: 45),
-        label: label,
-      );
+          icon: imagePath != null
+              ? ImageIcon(
+            AssetImage(imagePath),
+            size: 32,
+          )
+              : Icon(iconData!),
+          label: label);
 }

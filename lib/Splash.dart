@@ -21,7 +21,7 @@ class _SplashState extends State<Splash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-backgroundColor:AppColors.orange,
+backgroundColor:AppColors.primary,
       body:Column(
         children: [
           Spacer(flex: 4,),
